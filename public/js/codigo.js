@@ -113,9 +113,11 @@ function contenidosUsuarioRegistrado(usuario) {
         <div class="col-sm-3"></div>
         <div class="col-sm-3"></div>
           <label for="inicio" class="col-sm-2 col-form-label">Fecha de Inicio: </label>
-          <input type="date" id="inicio" class="form-control my-3 col-sm-1" maxlenght="4" required>
+          <input type="date" id="inicio" class="form-control my-3 col-sm-4" maxlenght="4" required>
+          <div class="col-sm-3"></div>
+          <div class="col-sm-3"></div>
           <label for="final" class="col-sm-2 col-form-label">Fecha de Fin: </label>
-          <input type="date" id="final" class="form-control my-3 col-sm-1" maxlenght="4" required>
+          <input type="date" id="final" class="form-control my-3 col-sm-4" maxlenght="4" required>
         <div class="col-sm-3"></div>
         <div class="col-sm-3"></div>
           <label for="cuando" class="col-sm-2 col-form-label">Cuándo se trabaja: </label>
@@ -124,7 +126,7 @@ function contenidosUsuarioRegistrado(usuario) {
         <div class="col-sm-3"></div>
         <div class="col-sm-3"></div>
           <label for="quien" class="col-sm-2 col-form-label">Quién lo trabaja: </label>
-          <input type="text" id="quien" class="form-control my-3 col-sm-1" max="120" min="1" required maxlength="3">
+          <input type="number" id="quien" class="form-control my-3 col-sm-1" max="120" min="1" required maxlength="3">
         <div class="col-sm-2"></div>
           <button class="btn btn-dark my-3 form-control" id="guardar">Guardar</button>
           <div id="act"></div>
