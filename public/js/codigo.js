@@ -100,22 +100,22 @@ function contenidosUsuarioRegistrado(usuario) {
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-        
+
       <h2>Gestión de datos de comerciales</h2>
         <p>Todos los datos son obligatorios</p>
 
       <form action="#" class="form-inline">
         <div class="col-sm-3"></div>
           <label for="tipo" class="col-sm-2 col-form-label">Tipo de territorio: </label>
-          <input type="text" id="tipo" class="form-control my-3 col-sm-1" min="1" max="10" required maxlength="2">
+          <input type="text" id="tipo" class="form-control my-3 col-sm-1" required maxlength="2" pattern="10 || [1-9]">
           <label for="territorio" class="col-sm-2 col-form-label">Número de territorio: </label>
           <input type="text" id="territorio" class="form-control my-3 col-sm-1" min="1" max="300" required maxlength="3">
         <div class="col-sm-3"></div>
         <div class="col-sm-3"></div>
           <label for="inicio" class="col-sm-2 col-form-label">Fecha de Inicio: </label>
-          <input type="text" id="inicio" class="form-control my-3 col-sm-1" maxlenght="4" required>
+          <input type="date" id="inicio" class="form-control my-3 col-sm-1" maxlenght="4" required>
           <label for="final" class="col-sm-2 col-form-label">Fecha de Fin: </label>
-          <input type="text" id="final" class="form-control my-3 col-sm-1" maxlenght="4" required>
+          <input type="date" id="final" class="form-control my-3 col-sm-1" maxlenght="4" required>
         <div class="col-sm-3"></div>
         <div class="col-sm-3"></div>
           <label for="cuando" class="col-sm-2 col-form-label">Cuándo se trabaja: </label>
@@ -127,6 +127,7 @@ function contenidosUsuarioRegistrado(usuario) {
           <input type="text" id="quien" class="form-control my-3 col-sm-1" max="120" min="1" required maxlength="3">
         <div class="col-sm-2"></div>
           <button class="btn btn-dark my-3 form-control" id="guardar">Guardar</button>
+          <div id="act"></div>
         <div class="col-sm-3"></div>
       </form>
 
@@ -212,6 +213,7 @@ function guardar() {
   if (tipo.trim() === "" || territorio.trim() === "" || inicio.trim() === "" || final.trim() === "" || cuando.trim() === "" || quien.trim() === "") {
     alert("Todos los datos son obligatorios.");
   } else {
+    // validar los datos del formulario aqui
     var usuario = {
       tipo: tipo,
       territorio: territorio,
@@ -252,8 +254,8 @@ function cargarTabla() {
           <td>${doc.data().final}</td>
           <td>${doc.data().cuando}</td>
           <td>${doc.data().quien}</td>
-          <td><i class="fas fa-pencil-alt" onclick="editarDatos('${doc.id}', '${doc.data().tipo}', '${doc.data().territorio}', '${doc.data().inicio}' , '${doc.data().final}' , '${doc.data().cuando}' , '${doc.data().quien}');"></i></td>
-          <td><i class="fas fa-trash-alt" onclick="borrarDatos('${doc.id}', '${doc.data().tipo}', '${doc.data().territorio}');"></i></td>
+          <td><i id="pen" class="fas fa-pencil-alt" onclick="editarDatos('${doc.id}', '${doc.data().tipo}', '${doc.data().territorio}', '${doc.data().inicio}', '${doc.data().final}', '${doc.data().cuando}', '${doc.data().quien}');"></i></td>
+          <td><i id="cut" class="fas fa-trash-alt" onclick="borrarDatos('${doc.id}', '${doc.data().tipo}', '${doc.data().territorio}');"></i></td>
         </tr>
       `;
     });
@@ -274,7 +276,7 @@ function borrarDatos(parId, parTipo, parTerritorio) {
 }
 
 // Editar datos de documentos
-function editarDatos(parId, parTipo, parTerritorio, parInicio) {
+function editarDatos(parId, parTipo, parTerritorio, parInicio, parFinal, parCuando,parQuien) {
   document.getElementById("tipo").value = parTipo;
   document.getElementById("territorio").value = parTerritorio;
   document.getElementById("inicio").value = parInicio;
@@ -284,7 +286,7 @@ function editarDatos(parId, parTipo, parTerritorio, parInicio) {
 
   $("#guardar").css("display", "none");
   $(".linea").attr("disabled", true);
-  $("#act").append("<button class='btn btn-info my-3' id='actualizar'>Guardar</button>");
+  $("#act").append("<button class='btn btn-success my-3' id='actualizar'>Editar</button>");
   $("#actualizar").on("click", function () {
     var userRef = db.collection("usuarios").doc(parId);
     tipo = document.getElementById("tipo").value;
