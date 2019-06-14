@@ -1,4 +1,7 @@
-// Author:Ibai Trueba Campo
+/* Autor: Ibai Trueba Campo
+Fecha: 14/06/2019
+Descripción: Ejercicio práctico del MF0952_2 */
+
 // Your web app's Firebase configuration
 var config = {
   apiKey: "AIzaSyDgxeRRE_uqBEQ5NqDCaMFBcAXzFpGpro0",
@@ -100,29 +103,29 @@ function contenidosUsuarioRegistrado(usuario) {
       <form action="#">
         <h2>Gestión de Usuarios</h2>
         <p>Todos los datos son obligatorios</p>
-        <div class="form-inline">
-        <label for="nombre" class="col-sm-2 col-form-label">Tipo Territorio: </label>
-        <input type="number" id="nombre" placeholder="Introduce un nombre" class="form-control my-3 col-sm-4" maxlenght="2" pattern="[]">
+      <div class="form-inline">
+        <label for="tipo" class="col-sm-2 col-form-label">Tipo de territorio: </label>
+        <input type="number" id="tipo" class="form-control my-3 col-sm-2" maxlenght="2" required >
       </div>
       <div class="form-inline">
-        <label for="apellido" class="col-sm-2 col-form-label">Territorio: </label>
-        <input type="text" id="apellido" placeholder="Introduce un apellido" class="form-control my-3 col-sm-4" maxlenght="300" pattern="[]">
+        <label for="territorio" class="col-sm-2 col-form-label">Número de territorio: </label>
+        <input type="text" id="territorio" class="form-control my-3 col-sm-4" maxlenght="300" required>
       </div>
       <div class="form-inline">
-        <label for="nacimiento" class="col-sm-2 col-form-label">Fecha Inicio: </label>
-        <input type="text" id="nacimiento" placeholder="Introduce año de nacimiento" class="form-control my-3 col-sm-1" maxlenght="4" pattern="\d{4}">
+        <label for="inicio" class="col-sm-2 col-form-label">Fecha de Inicio: </label>
+        <input type="text" id="inicio" class="form-control my-3 col-sm-1" maxlenght="4" required>
       </div>
       <div class="form-inline">
-        <label for="final" class="col-sm-2 col-form-label">Fecha Final: </label>
-        <input type="text" id="final" placeholder="Introduce año de nacimiento" class="form-control my-3 col-sm-1" maxlenght="4" pattern="\d{4}">
+        <label for="final" class="col-sm-2 col-form-label">Fecha de Fin: </label>
+        <input type="text" id="final" class="form-control my-3 col-sm-1" maxlenght="4" required>
       </div>
       <div class="form-inline">
-        <label for="nacimiento" class="col-sm-2 col-form-label">Cuándo: </label>
-        <input type="text" id="nacimiento" placeholder="Introduce año de nacimiento" class="form-control my-3 col-sm-1" maxlenght="50" pattern="\d{4}">
+        <label for="cuando" class="col-sm-2 col-form-label">Cuándo se trabaja: </label>
+        <input type="text" id="cuando" class="form-control my-3 col-sm-1" maxlenght="50" required>
       </div>
       <div class="form-inline">
-        <label for="nacimiento" class="col-sm-2 col-form-label">Quién: </label>
-        <input type="text" id="nacimiento" placeholder="Introduce año de nacimiento" class="form-control my-3 col-sm-1" maxlenght="120" pattern="\d{4}">
+        <label for="quien" class="col-sm-2 col-form-label">Quién lo trabaja: </label>
+        <input type="text" id="quien" class="form-control my-3 col-sm-1" maxlenght="120" required>
       </div>
       <button class="btn btn-dark my-3" id="guardar">Guardar</button>
 
@@ -130,12 +133,12 @@ function contenidosUsuarioRegistrado(usuario) {
         <thead>
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Tipo T</th>
-            <th scope="col">Territorio</th>
-            <th scope="col">Fecha Inicio</th>
-            <th scope="col">Fecha Final</th>
-            <th scope="col">Cuándo</th>
-            <th scope="col">Quién</th>
+            <th scope="col">Tipo de territorio</th>
+            <th scope="col">Número de territorio</th>
+            <th scope="col">Fecha de inicio</th>
+            <th scope="col">Fecha de fin</th>
+            <th scope="col">Cuándo se trabaja</th>
+            <th scope="col">Quién lo trabaja</th>
             <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
           </tr>
@@ -199,24 +202,33 @@ function confirmar() {
 }
 
 function guardar() {
-  nombre = document.getElementById("nombre").value;
-  apellido = document.getElementById("apellido").value;
-  nacimiento = document.getElementById("nacimiento").value;
-  if (nombre.trim() === "" || apellido.trim() === "" || nacimiento.trim() === "") {
+  tipo = document.getElementById("tipo").value;
+  territorio = document.getElementById("territorio").value;
+  inicio = document.getElementById("inicio").value;
+  final = document.getElementById("final").value;
+  cuando = document.getElementById("cuando").value;
+  quien = document.getElementById("quien").value;
+  if (tipo.trim() === "" || territorio.trim() === "" || inicio.trim() === "" || final.trim() === "" || cuando.trim() === "" || quien.trim() === "") {
     alert("Todos los datos son obligatorios.");
   } else {
     var usuario = {
-      nombre: nombre,
-      apellido: apellido,
-      nacimiento: nacimiento
+      tipo: tipo,
+      territorio: territorio,
+      inicio: inicio,
+      final: final,
+      cuando: cuando,
+      quien: quien
     };
 
     db.collection("usuarios").add(usuario)
       .then(function (docRef) {
         console.log("Documento escrito con ID: ", docRef.id);
-        document.getElementById("nombre").value = "";
-        document.getElementById("apellido").value = "";
-        document.getElementById("nacimiento").value = "";
+        document.getElementById("tipo").value = "";
+        document.getElementById("territorio").value = "";
+        document.getElementById("inicio").value = "";
+        document.getElementById("final").value = "";
+        document.getElementById("cuando").value = "";
+        document.getElementById("quien").value = "";
       })
       .catch(function (error) {
         console.error("Error añadiendo el documento: ", error);
@@ -233,11 +245,14 @@ function cargarTabla() {
       tabla.innerHTML += `
         <tr>
           <th scope="row">${doc.id}</th>
-          <td>${doc.data().nombre}</td>
-          <td>${doc.data().apellido}</td>
-          <td>${doc.data().nacimiento}</td>
-          <td><button class="linea btn btn-success" onclick="editarDatos('${doc.id}', '${doc.data().nombre}', '${doc.data().apellido}', '${doc.data().nacimiento}');">Editar</button></td>
-          <td><button class="linea btn btn-danger" onclick="borrarDatos('${doc.id}', '${doc.data().nombre}', '${doc.data().apellido}');">Eliminar</button></td>
+          <td>${doc.data().tipo}</td>
+          <td>${doc.data().territorio}</td>
+          <td>${doc.data().inicio}</td>
+          <td>${doc.data().final}</td>
+          <td>${doc.data().cuando}</td>
+          <td>${doc.data().quien}</td>
+          <td><button class="linea btn btn-success" onclick="editarDatos('${doc.id}', '${doc.data().tipo}', '${doc.data().territorio}', '${doc.data().inicio}' , '${doc.data().final}' , '${doc.data().cuando}' , '${doc.data().quien}');">Editar</button></td>
+          <td><button class="linea btn btn-danger" onclick="borrarDatos('${doc.id}', '${doc.data().tipo}', '${doc.data().territorio}');">Eliminar</button></td>
         </tr>
       `;
     });
@@ -245,8 +260,8 @@ function cargarTabla() {
 }
 
 // Borrar datos de documentos
-function borrarDatos(parId, parNombre, parApellido) {
-  var re = confirm("¿Está seguro que quiere borrar este usuario: " + parNombre + ' ' + parApellido + "?");
+function borrarDatos(parId, parTipo, parTerritorio) {
+  var re = confirm("¿Está seguro que quiere borrar el campo " + parId + "?");
   if (re == true) {
     db.collection("usuarios").doc(parId).delete()
       .then(function () {
@@ -258,33 +273,45 @@ function borrarDatos(parId, parNombre, parApellido) {
 }
 
 // Editar datos de documentos
-function editarDatos(parId, parNombre, parApellido, parNacimiento) {
-  document.getElementById("nombre").value = parNombre;
-  document.getElementById("apellido").value = parApellido;
-  document.getElementById("nacimiento").value = parNacimiento;
+function editarDatos(parId, parTipo, parTerritorio, parInicio) {
+  document.getElementById("tipo").value = parTipo;
+  document.getElementById("territorio").value = parTerritorio;
+  document.getElementById("inicio").value = parInicio;
+  document.getElementById("final").value = parFinal;
+  document.getElementById("cuando").value = parCuando;
+  document.getElementById("quien").value = parQuien;
 
   $("#guardar").css("display", "none");
   $(".linea").attr("disabled", true);
   $("#act").append("<button class='btn btn-info my-3' id='actualizar'>Guardar</button>");
   $("#actualizar").on("click", function () {
     var userRef = db.collection("usuarios").doc(parId);
-    nombre = document.getElementById("nombre").value;
-    apellido = document.getElementById("apellido").value;
-    nacimiento = document.getElementById("nacimiento").value;
+    tipo = document.getElementById("tipo").value;
+    territorio = document.getElementById("territorio").value;
+    inicio = document.getElementById("inicio").value;
+    final = document.getElementById("final").value;
+    cuando = document.getElementById("cuando").value;
+    quien = document.getElementById("quien").value;
 
-    if (nombre.trim() === "" || apellido.trim() === "" || nacimiento.trim() === "") {
+    if (tipo.trim() === "" || territorio.trim() === "" || inicio.trim() === "" || final.trim() === "" || cuando.trim() === "" || quien.trim() === "") {
       alert("Todos los datos son obligatorios.");
     } else {
       return userRef.update({
-          nombre: document.getElementById("nombre").value,
-          apellido: document.getElementById("apellido").value,
-          nacimiento: document.getElementById("nacimiento").value
+          tipo: document.getElementById("tipo").value,
+          territorio: document.getElementById("territorio").value,
+          inicio: document.getElementById("inicio").value,
+          final: document.getElementById("final").value,
+          cuando: document.getElementById("cuando").value,
+          quien: document.getElementById("quien").value
         })
         .then(function () {
           console.log("Usuario actualizado correctamente.");
-          document.getElementById("nombre").value = "";
-          document.getElementById("apellido").value = "";
-          document.getElementById("nacimiento").value = "";
+          document.getElementById("tipo").value = "";
+          document.getElementById("territorio").value = "";
+          document.getElementById("inicio").value = "";
+          document.getElementById("final").value = "";
+          document.getElementById("cuando").value = "";
+          document.getElementById("quien").value = "";
           $("#guardar").css("display", "inline");
           $(".linea").attr("disabled", false);
           $("#act").empty();
