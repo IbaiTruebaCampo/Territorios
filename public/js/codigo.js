@@ -93,41 +93,42 @@ function contenidosUsuarioRegistrado(usuario) {
     contenido.innerHTML = `
       <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
         <h4 class="alert-heading">¡Bienvenido ${usuario.email}!</h4>
-        <p>Siéntete a gusto en nuestro portal.</p>
+        <p>Portal de gestión de datos.</p>
         <hr>
-        <p class="mb-0">Tenemos muchos contenidos exclusivos solo para usuarios registrados como tú.</p>
+        <p class="mb-0">Complete o edite los campos correspondientes.</p>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="#">
-        <h2>Gestión de Usuarios</h2>
+        
+      <h2>Gestión de datos de comerciales</h2>
         <p>Todos los datos son obligatorios</p>
-      <div class="form-inline">
-        <label for="tipo" class="col-sm-2 col-form-label">Tipo de territorio: </label>
-        <input type="number" id="tipo" class="form-control my-3 col-sm-2" maxlenght="2" required >
-      </div>
-      <div class="form-inline">
-        <label for="territorio" class="col-sm-2 col-form-label">Número de territorio: </label>
-        <input type="text" id="territorio" class="form-control my-3 col-sm-4" maxlenght="300" required>
-      </div>
-      <div class="form-inline">
-        <label for="inicio" class="col-sm-2 col-form-label">Fecha de Inicio: </label>
-        <input type="text" id="inicio" class="form-control my-3 col-sm-1" maxlenght="4" required>
-      </div>
-      <div class="form-inline">
-        <label for="final" class="col-sm-2 col-form-label">Fecha de Fin: </label>
-        <input type="text" id="final" class="form-control my-3 col-sm-1" maxlenght="4" required>
-      </div>
-      <div class="form-inline">
-        <label for="cuando" class="col-sm-2 col-form-label">Cuándo se trabaja: </label>
-        <input type="text" id="cuando" class="form-control my-3 col-sm-1" maxlenght="50" required>
-      </div>
-      <div class="form-inline">
-        <label for="quien" class="col-sm-2 col-form-label">Quién lo trabaja: </label>
-        <input type="text" id="quien" class="form-control my-3 col-sm-1" maxlenght="120" required>
-      </div>
-      <button class="btn btn-dark my-3" id="guardar">Guardar</button>
+
+      <form action="#" class="form-inline">
+        <div class="col-sm-3"></div>
+          <label for="tipo" class="col-sm-2 col-form-label">Tipo de territorio: </label>
+          <input type="text" id="tipo" class="form-control my-3 col-sm-1" min="1" max="10" required maxlength="2">
+          <label for="territorio" class="col-sm-2 col-form-label">Número de territorio: </label>
+          <input type="text" id="territorio" class="form-control my-3 col-sm-1" min="1" max="300" required maxlength="3">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3"></div>
+          <label for="inicio" class="col-sm-2 col-form-label">Fecha de Inicio: </label>
+          <input type="text" id="inicio" class="form-control my-3 col-sm-1" maxlenght="4" required>
+          <label for="final" class="col-sm-2 col-form-label">Fecha de Fin: </label>
+          <input type="text" id="final" class="form-control my-3 col-sm-1" maxlenght="4" required>
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3"></div>
+          <label for="cuando" class="col-sm-2 col-form-label">Cuándo se trabaja: </label>
+          <input type="text" id="cuando" class="form-control my-3 col-sm-4" required
+          pattern="[\dA-Za-zÑñÇçÁáÉéÍíÓóÚú\s-+=()¿?!¡:.,;&%@]{1,50}" maxlength="50">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3"></div>
+          <label for="quien" class="col-sm-2 col-form-label">Quién lo trabaja: </label>
+          <input type="text" id="quien" class="form-control my-3 col-sm-1" max="120" min="1" required maxlength="3">
+        <div class="col-sm-2"></div>
+          <button class="btn btn-dark my-3 form-control" id="guardar">Guardar</button>
+        <div class="col-sm-3"></div>
+      </form>
 
       <table class="table">
         <thead>
@@ -251,8 +252,8 @@ function cargarTabla() {
           <td>${doc.data().final}</td>
           <td>${doc.data().cuando}</td>
           <td>${doc.data().quien}</td>
-          <td><button class="linea btn btn-success" onclick="editarDatos('${doc.id}', '${doc.data().tipo}', '${doc.data().territorio}', '${doc.data().inicio}' , '${doc.data().final}' , '${doc.data().cuando}' , '${doc.data().quien}');">Editar</button></td>
-          <td><button class="linea btn btn-danger" onclick="borrarDatos('${doc.id}', '${doc.data().tipo}', '${doc.data().territorio}');">Eliminar</button></td>
+          <td><i class="fas fa-pencil-alt" onclick="editarDatos('${doc.id}', '${doc.data().tipo}', '${doc.data().territorio}', '${doc.data().inicio}' , '${doc.data().final}' , '${doc.data().cuando}' , '${doc.data().quien}');"></i></td>
+          <td><i class="fas fa-trash-alt" onclick="borrarDatos('${doc.id}', '${doc.data().tipo}', '${doc.data().territorio}');"></i></td>
         </tr>
       `;
     });
