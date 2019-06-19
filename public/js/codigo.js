@@ -107,26 +107,26 @@ function contenidosUsuarioRegistrado(usuario) {
       <form action="#" class="form-inline">
         <div class="col-sm-3"></div>
           <label for="tipo" class="col-sm-2 col-form-label">Tipo de territorio: </label>
-          <input type="text" id="tipo" class="form-control my-3 col-sm-1" required maxlength="2" pattern="10 || [1-9]">
+          <input type="text" id="tipo" class="form-control my-3 col-sm-1" maxlength="2" pattern="10 || [1-9]">
           <label for="territorio" class="col-sm-2 col-form-label">Número de territorio: </label>
-          <input type="text" id="territorio" class="form-control my-3 col-sm-1" min="1" max="300" required maxlength="3">
+          <input type="text" id="territorio" class="form-control my-3 col-sm-1" min="1" max="300" maxlength="3">
         <div class="col-sm-3"></div>
         <div class="col-sm-3"></div>
           <label for="inicio" class="col-sm-2 col-form-label">Fecha de Inicio: </label>
-          <input type="date" id="inicio" class="form-control my-3 col-sm-4" maxlenght="4" required>
+          <input type="date" id="inicio" class="form-control my-3 col-sm-4" maxlenght="4">
           <div class="col-sm-3"></div>
           <div class="col-sm-3"></div>
           <label for="final" class="col-sm-2 col-form-label">Fecha de Fin: </label>
-          <input type="date" id="final" class="form-control my-3 col-sm-4" maxlenght="4" required>
+          <input type="date" id="final" class="form-control my-3 col-sm-4" maxlenght="4">
         <div class="col-sm-3"></div>
         <div class="col-sm-3"></div>
           <label for="cuando" class="col-sm-2 col-form-label">Cuándo se trabaja: </label>
-          <input type="text" id="cuando" class="form-control my-3 col-sm-4" required
+          <input type="text" id="cuando" class="form-control my-3 col-sm-4"
           pattern="[\dA-Za-zÑñÇçÁáÉéÍíÓóÚú\s-+=()¿?!¡:.,;&%@]{1,50}" maxlength="50">
         <div class="col-sm-3"></div>
         <div class="col-sm-3"></div>
           <label for="quien" class="col-sm-2 col-form-label">Quién lo trabaja: </label>
-          <input type="number" id="quien" class="form-control my-3 col-sm-1" max="120" min="1" required maxlength="3">
+          <input type="number" id="quien" class="form-control my-3 col-sm-1" max="120" min="1" maxlength="3">
         <div class="col-sm-2"></div>
           <button class="btn btn-dark my-3 form-control" id="guardar">Guardar</button>
           <div id="act"></div>
