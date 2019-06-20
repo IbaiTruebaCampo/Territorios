@@ -81,7 +81,7 @@ function observador() {
       console.log("No existe ningún usuario activo.");
       var contenido = document.getElementById("contenido");
       contenido.innerHTML = `
-      <p>Conéctate para ver los contenidos exclusivos para usuarios registrados.</p>
+      <p>Conéctate para tener acceso a los datos del sistema.</p>
       `;
     }
   });
