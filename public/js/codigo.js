@@ -107,7 +107,7 @@ function contenidosUsuarioRegistrado(usuario) {
       <form action="#" class="form-inline">
         <div class="col-sm-3"></div>
           <label for="tipo" class="col-sm-2 col-form-label">Tipo de territorio: </label>
-          <input type="text" id="tipo" class="form-control my-3 col-sm-1" maxlength="2" pattern="10 || [1-9]">
+          <input type="text" id="tipo" class="form-control my-3 col-sm-1" maxlength="2" pattern="(10)| [1-9]">
           <label for="territorio" class="col-sm-2 col-form-label">Número de territorio: </label>
           <input type="text" id="territorio" class="form-control my-3 col-sm-1" min="1" max="300" maxlength="3">
         <div class="col-sm-3"></div>
